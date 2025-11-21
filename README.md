@@ -11,7 +11,7 @@ ___
 
 **[Script Toolbox Wiki](https://github.com/E-Ams/Script_Toolbox/wiki)** | **[Report a Bug](https://github.com/E-Ams/Script_Toolbox/issues)**
 
-Developed by **E-Ams** | Licensed under [MIT](https://github.com/E-Ams/Script_Toolbox/blob/main/LICENCE)
+Developed by **E-Ams** | Licensed under [MIT](https://github.com/E-Ams/Script_Toolbox/blob/main/LICENSE)
 <br>
 *Documentation Last Updated: 2025*
 
