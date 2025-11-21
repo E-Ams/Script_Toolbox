@@ -25,11 +25,6 @@ jobs:
       with:
         python-version: '3.x'
         
-    - name: Convert wiki links and copy to README
-      run: |
-        cp wiki-content/Home.md README.md
-        python .github/scripts/Convert_Links.py
-        
     - name: Commit and push if changed
       run: |
         git config --local user.email "action@github.com"
