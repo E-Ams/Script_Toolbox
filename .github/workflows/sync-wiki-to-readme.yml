@@ -28,7 +28,7 @@ jobs:
     - name: Convert wiki links and copy to README
       run: |
         cp wiki-content/Home.md README.md
-        python .github/scripts/convert_links.py
+        python .github/scripts/Convert_Links.py
         
     - name: Commit and push if changed
       run: |
