@@ -4,28 +4,33 @@ import os
 def convert_wiki_links(content):
     """Convert wiki-style links to absolute GitHub wiki URLs"""
     
-    # Pattern to match [text](link)
-    pattern = r'\[([^\]]+)\]\(([^)]+)\)'
+    # More flexible pattern that handles various markdown link formats
+    patterns = [
+        r'\[([^\]]+)\]\(([^)#]+)\)',  # Standard [text](link)
+        r'\[([^\]]+)\]\[([^\]]+)\]',  # Reference style [text][ref]
+    ]
     
-    def replace_link(match):
+    converted_content = content
+    
+    # Handle standard links
+    def replace_standard_link(match):
         text = match.group(1)
-        link = match.group(2)
+        link = match.group(2).strip()
         
-        print(f"Found link: '{text}' -> '{link}'")
+        print(f"Standard link: '{text}' -> '{link}'")
         
-        # Don't convert absolute URLs, anchor links, or mailto links
-        if link.startswith(('http://', 'https://', '#', '/', 'mailto:')):
-            print(f"  Skipping (absolute URL or anchor)")
+        # Skip if already absolute or special link
+        if any(link.startswith(prefix) for prefix in 
+               ['http://', 'https://', '#', '/', 'mailto:']):
             return match.group(0)
         
-        # Convert wiki page links
+        # Convert to absolute wiki URL
         base_url = "https://github.com/E-Ams/Custom_Tools/wiki"
-        new_link = f'[{text}]({base_url}/{link})'
-        print(f"  Converting to: {new_link}")
-        return new_link
+        return f'[{text}]({base_url}/{link})'
     
-    new_content = re.sub(pattern, replace_link, content)
-    return new_content
+    converted_content = re.sub(patterns[0], replace_standard_link, converted_content)
+    
+    return converted_content
 
 def main():
     # Read the README.md file
@@ -36,20 +41,14 @@ def main():
         print("README.md not found!")
         return
     
-    print("=== Before conversion ===")
-    print(content[:500] + "..." if len(content) > 500 else content)
-    
     # Convert the links
     converted_content = convert_wiki_links(content)
-    
-    print("=== After conversion ===")
-    print(converted_content[:500] + "..." if len(converted_content) > 500 else converted_content)
     
     # Write back to README.md
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(converted_content)
     
-    print("Successfully converted links in README.md")
+    print("Link conversion completed")
 
 if __name__ == '__main__':
     main()
