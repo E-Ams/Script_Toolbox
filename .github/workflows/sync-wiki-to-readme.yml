@@ -20,15 +20,32 @@ jobs:
         repository: E-Ams/Custom_Tools.wiki
         path: wiki-content
         
+    - name: Debug - Show wiki content
+      run: |
+        echo "=== Wiki Home.md content ==="
+        cat wiki-content/Home.md
+        echo "=== End of Wiki content ==="
+        
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
         
-    - name: Convert wiki links and copy to README
+    - name: Create and run Python conversion script
       run: |
         cp wiki-content/Home.md README.md
-        python .github/scripts/Convert_Links.py
+        
+        # Create the Python script with better debugging
+        cat > convert_links.py << 'EOF'
+        
+        # Run the Python script
+        python convert_links.py
+        
+    - name: Debug - Show final README
+      run: |
+        echo "=== Final README.md content ==="
+        cat README.md
+        echo "=== End of README content ==="
         
     - name: Commit and push if changed
       run: |
