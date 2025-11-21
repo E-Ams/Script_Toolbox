@@ -1,7 +1,2 @@
-# Custom Tools
-
-Welcome to Custom Tools! This repository contains various useful tools and utilities.
-
-<!-- WIKI_CONTENT_START -->
-<!-- WIKI_CONTENT_END -->
-
+## 📚 Documentation
+See the [Wiki](https://github.com/E-Ams/Custom_Tools/wiki) for detailed documentation and usage guides.
